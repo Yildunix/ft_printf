@@ -1,28 +1,33 @@
-NAME = libftprintf.a
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
-MKDIR = mkdir
-AR = ar crsv
-SRC = $(wildcard *.c) 
+NAME		= libftprintf.a
 
-OBJS = $(SRC:%.c=obj/%.o)
-OBJS_BONUS = $(SRC_BONUS:.c=.o)
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+AR			= ar rcs
+RM			= rm -f
+HEADER		= ft_printf.h
+
+SRCS		= printfori.c \
+			  print_char.c \
+			  print_int.c \
+			  print_hexa.c
+	
+OBJ_DIR		= obj
+OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-obj/%.o: %.c | obj
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c $(HEADER) Makefile | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I. -c $< -o $@
 
-bonus: $(NAME) $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	$(RM) obj
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

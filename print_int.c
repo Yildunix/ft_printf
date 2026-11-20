@@ -3,54 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endyildi <endyildi@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: endyildi <endyildi@mulhouse42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/19 15:49:32 by endyildi          #+#    #+#             */
-/*   Updated: 2026/11/19 16:31:44 by endyildi         ###   ########.fr       */
+/*   Updated: 2026/11/20 23:04:28 by endyildi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
+#include "ft_printf.h"
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
-	write (1 , &c, 1);
+	write(1, &c, 1);
 }
-int count_nbr(int nbr)
+
+int	count_nbr(long nbr)
 {
 	int	i;
 
 	i = 0;
-	if (nbr < 0)
-	{
-		n = -n;
+	if (nbr <= 0)
 		i++;
-	}
-	while(nbr > 0)
+	if (nbr < 0)
+		nbr = -nbr;
+	while (nbr > 0)
 	{
-		n = n / 10;
+		nbr = nbr / 10;
 		i++;
 	}
 	return (i);
 }
 
-int ft_printnbr(int nbr)
+static void	ft_putnbr_ul(unsigned long n)
 {
-	if (nbr < 0)
+	if (n >= 10)
+		ft_putnbr_ul(n / 10);
+	ft_putchar((n % 10) + '0');
+}
+
+int	ft_printnbr(int nbr)
+{
+	long	n;
+
+	n = nbr;
+	if (n < 0)
 	{
 		ft_putchar('-');
 		n = -n;
 	}
-	if (nbr >= 10)
-		ft_printnbr(nbr / 10);
-	ft_putchar(nbr % 10 + '0');
+	ft_putnbr_ul(n);
 	return (count_nbr(nbr));
 }
 
-int ft_unsignedprintnbr(unsigned int nbr)
+int	ft_unsignedprintnbr(unsigned int nbr)
 {
-	if (nbr >= 10)
-		ft_printnbr(nbr / 10);
-	ft_putchar(nbr % 10 + '0');
+	ft_putnbr_ul(nbr);
 	return (count_nbr(nbr));
 }

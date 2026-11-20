@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_txt.c                                       :+:      :+:    :+:   */
+/*   print_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endyildi <endyildi@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: endyildi <endyildi@mulhouse42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/19 15:22:32 by endyildi          #+#    #+#             */
-/*   Updated: 2026/11/19 15:34:30 by endyildi         ###   ########.fr       */
+/*   Updated: 2026/11/20 23:35:30 by endyildi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printchar(char c)
+int	ft_print_char(char c)
 {
-    write(1, &c, 1);
-    return (1);
+	write(1, &c, 1);
+	return (1);
 }
 
-int ft_writelen(char *str)
+int	ft_writelen(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
 	if (!str)
-		
-    write (str[i]!= '\0')
+		return (write(1, "(null)", 6));
+	i = 0;
+	while (str[i] != '\0')
 	{
-		write(1, str[i], 1);
+		write(1, &str[i], 1);
 		i++;
 	}
-	return (i)
+	return (i);
 }
